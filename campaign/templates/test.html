@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Kickstarter Prediction - {{ title }}</title>
+        <link rel="stylesheet" href="https://unpkg.com/picnic"/>
+    </head>
+    <body>
+        <h2>This is just a test form!</h2>
+        This is just a test form, to see if I can take data from a form and put it into a predictor
+        <div>
+            <form action="/predict" method="post">
+                <select name="category">
+                  {% for category in categories %}
+                  <option value="{{ category }}">{{ category }}</option>
+                  {% endfor %}
+                </select>
+                <select name="sub_category">
+                    {% for subcategory in subcategories %}
+                    <option value="{{ subcategory }}">{{ subcategory }}</option>
+                    {% endfor %}
+                  </select>
+                <input type="text" name="goal" placeholder="Enter the goal in dollars">
+                <input type="text" name="blurb_length" placeholder="Blurb length, should be an integer">
+                <input type="text" name="campaign_duration" placeholder="How long will the campaign be active (whole number of days">
+                <input type="submit" value="Predict campaign success">
+            </form>
+        </div>
+    </body>
+</html>
