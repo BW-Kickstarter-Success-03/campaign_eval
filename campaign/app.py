@@ -33,7 +33,7 @@ def create_app():
         #     ret_string = "this campaign is likely to succeed"
         # else:
         #     ret_string = "this campaign is likely to fail"
-        return render_template('test.html', title='Home', categories=categories, subcategories=subcategories)
+        return render_template('home.html', title='Home', categories=categories, subcategories=subcategories)
 
 
     @APP.route("/predict", methods=['POST'])

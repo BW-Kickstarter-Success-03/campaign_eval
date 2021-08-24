@@ -5,17 +5,42 @@
         <title>Kickstarter Prediction - {{ title }}</title>
         <link rel="stylesheet" href="https://unpkg.com/picnic"/>
     </head>
-
     <body>
-        <h1>This is a placeholder, nothing is implemented yet</h1>
-        I've created a dataframe from the following data: <br/>
-        'id': [9999999999],<br/>
-        'category':['comics'],<br/>
-        'goal':[2500.0],<br/>
-        'country':['US'],<br/>
-        'blurb_length':[25],<br/>
-        'campaign_duration':[60],<br/>
-        'sub_category': ['graphic novels']<br/><br/>
-        I've taken this, put it into the model, and according to it, {{pred}}.
+        <h2>Enter your data</h2>
+        Fill out the form below to make a prediction on your campaign:
+        <div>
+            <form action="/predict" method="post">
+                <br/><br/>Select Category:<br/>
+                <select name="category" style="width: 350px;">
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select><br/>
+                Select Sub Category:<br/>
+                <select name="sub_category" style="width: 350px;">
+                    {% for subcategory in subcategories %}
+                    <option value="{{ subcategory }}">{{ subcategory }}</option>
+                    {% endfor %}
+                </select><br/>
+                Enter the goal in USD:<br/>
+                <input type="text" name="goal" id='goal' onkeyup="success()" placeholder="Enter the goal in dollars" style="width: 500px;"><br/>
+                Enter length of blurb:<br/>
+                <input type="text" name="blurb_length" id='blurb' onkeyup="success()" placeholder="Blurb length, should be an integer" style="width: 500px;"><br/>
+                Enter duration of campaign in days:<br/>
+                <input type="text" name="campaign_duration" onkeyup="success()" id='campaign' placeholder="Campaign length (number of days)" style="width: 500px;"><br/>
+                <input type="submit" id="predict_button" value="Predict campaign success" disabled='disabled'>
+                <script type="text/javascript">
+                    function success() {
+                        if(document.getElementById("blurb").value===""
+                            || document.getElementById("campaign").value===""
+                            || document.getElementById("goal").value==="") { 
+                               document.getElementById('predict_button').disabled = true; 
+                           } else { 
+                               document.getElementById('predict_button').disabled = false;
+                           }
+                       }
+                </script>
+            </form>
+        </div>
     </body>
 </html>

@@ -5,26 +5,17 @@
         <title>Kickstarter Prediction - {{ title }}</title>
         <link rel="stylesheet" href="https://unpkg.com/picnic"/>
     </head>
+
     <body>
-        <h2>This is just a test form!</h2>
-        This is just a test form, to see if I can take data from a form and put it into a predictor
-        <div>
-            <form action="/predict" method="post">
-                <select name="category">
-                  {% for category in categories %}
-                  <option value="{{ category }}">{{ category }}</option>
-                  {% endfor %}
-                </select>
-                <select name="sub_category">
-                    {% for subcategory in subcategories %}
-                    <option value="{{ subcategory }}">{{ subcategory }}</option>
-                    {% endfor %}
-                  </select>
-                <input type="text" name="goal" placeholder="Enter the goal in dollars">
-                <input type="text" name="blurb_length" placeholder="Blurb length, should be an integer">
-                <input type="text" name="campaign_duration" placeholder="How long will the campaign be active (whole number of days">
-                <input type="submit" value="Predict campaign success">
-            </form>
-        </div>
+        <h1>This is a placeholder, nothing is implemented yet</h1>
+        I've created a dataframe from the following data: <br/>
+        'id': [9999999999],<br/>
+        'category':['comics'],<br/>
+        'goal':[2500.0],<br/>
+        'country':['US'],<br/>
+        'blurb_length':[25],<br/>
+        'campaign_duration':[60],<br/>
+        'sub_category': ['graphic novels']<br/><br/>
+        I've taken this, put it into the model, and according to it, {{pred}}.
     </body>
 </html>
