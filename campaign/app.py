@@ -38,15 +38,20 @@ def create_app():
     @APP.route("/predict", methods=['POST'])
     def predict():
         data = {'id': [9999999999],
-            'category':[request.values['category']],
-            'goal':[request.values['goal']],
-            'blurb_length':[request.values['blurb_length']],
-            'campaign_duration':[request.values['campaign_duration']],
-            'sub_category': [request.values['sub_category']]
+            'Primary Category':[request.values['Primary Category']],
+            'Subcategory':[request.values['Subcategory']],
+            'Backers Count':[request.values['Backers Count']],
+            'Campaign Goal':[request.values['Campaign Goal']],
+            'Amount Pledged':[request.values['Amount Pledged']],
+            'Staff Pick':[request.values['Staff Pick']],
+            'Description Length':[request.values['Description Length']],
+            'Campaign Length':[request.values['Campaign Length']],
+            'Holiday Season':[request.values['Holiday Season']],
+            'Campaign Launch Length':[request.values['Campaign Launch Length']]
         }
         df = pd.DataFrame(data)
         df.set_index('id', drop=True, inplace=True)
-        predictor = pickle.load(open('prelim_model.pickle', 'rb'))
+        predictor = pickle.load(open('test_forest.pkl', 'rb'))
         prediciton = predictor.predict(df)
         if prediciton == 1:
             pred = "this campaign is likely to succeed"
