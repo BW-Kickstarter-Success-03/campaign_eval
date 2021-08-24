@@ -6,11 +6,15 @@
         <link rel="stylesheet" href="https://unpkg.com/picnic"/>
     </head>
     <body>
+        <style>
+            h2 {margin-left: 20px;}
+        </style>
         <h2>Enter your data</h2>
-        Fill out the form below to make a prediction on your campaign:
+        <p style="margin-left: 20px;">Fill out the form below to make a prediction on your campaign:</p>
         <div>
             <form action="/predict" method="post">
-                <br/><br/>Select Category:<br/>
+                <p style="margin-left: 20px">
+                <br/>Select Category:<br/>
                 <select name="Primary Category" style="width: 350px;">
                     {% for category in categories %}
                     <option value="{{ category }}">{{ category }}</option>
@@ -28,8 +32,6 @@
                 <input type="text" name="Campaign Goal" id='goal' onkeyup="success()" placeholder="Enter the goal in dollars" style="width: 500px;"><br/>
                 Estimated amount pledged:<br/>
                 <input type="text" name="Amount Pledged" id='pledged' onkeyup="success()" placeholder="Estimated amount pledged" style="width: 500px;"><br/>
-                Will staff pick your campaign:<br/>
-                <input type="text" name="Staff Pick" id='staff' onkeyup="success()" placeholder="Estimate for staff pick (0 or 1)" style="width: 500px;"><br/>
                 Length of Description:<br/>
                 <input type="text" name="Description Length" id='desclen' onkeyup="success()" placeholder="Words in description" style="width: 500px;"><br/>
                 Enter duration of campaign in days:<br/>
@@ -44,7 +46,6 @@
                         if(document.getElementById("backers").value===""
                             || document.getElementById("goal").value===""
                             || document.getElementById("pledged").value===""
-                            || document.getElementById("staff").value===""
                             || document.getElementById("desclen").value===""
                             || document.getElementById("campaign").value===""
                             || document.getElementById("holiday").value===""
@@ -55,6 +56,7 @@
                            }
                        }
                 </script>
+            </p>
             </form>
         </div>
     </body>
