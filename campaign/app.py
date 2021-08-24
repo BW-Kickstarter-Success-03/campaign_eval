@@ -46,7 +46,7 @@ def create_app():
         }
         df = pd.DataFrame(data)
         df.set_index('id', drop=True, inplace=True)
-        predictor = pickle.load(open('predictive_models\prelim_model.pickle', 'rb'))
+        predictor = pickle.load(open('prelim_model.pickle', 'rb'))
         prediciton = predictor.predict(df)
         if prediciton == 1:
             pred = "this campaign is likely to succeed"
