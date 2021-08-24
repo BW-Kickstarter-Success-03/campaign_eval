@@ -1,7 +1,6 @@
 import pickle
 from flask import Flask, render_template, request
 import pickle
-from os import getenv
 import pandas as pd
 
 
