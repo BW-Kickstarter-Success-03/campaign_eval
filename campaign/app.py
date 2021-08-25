@@ -1,7 +1,9 @@
+from datetime import timedelta
 import pickle
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
+from .extra_data import subcategories as subc
 
 
 def create_app():
@@ -10,29 +12,25 @@ def create_app():
     categories = ['film & video', 'music', 'technology', 'publishing', 
         'art', 'food', 'games', 'fashion', 'comics', 'design', 'photography',
         'crafts', 'theater', 'journalism', 'dance']
-    subcategories = ["web", 'product design', 'accessories', 'tabletop games',
-                'photobooks', 'comic books', 'comedy', 'illustration',
-                'gadgets', "children's books", 'shorts', 'apparel', 'drinks',
-                'graphic novels', 'documentary', 'small batch', 'fiction',
-                'restaurants', 'country & folk', 'hardware']
     @APP.route("/")
     def root():
-        # data = {'id': [9999999999],
-        #     'category':['comics'],
-        #     'goal':[2500.0],
-        #     'blurb_length':[25],
-        #     'campaign_duration':[60],
-        #     'sub_category': ['graphic novels']}
-        # df = pd.DataFrame(data)
-        # df.set_index('id', drop=True, inplace=True)
-        # # return render_template('test.html', test_string=df.columns)
-        # prediciton = predictor.predict(df)
-        # ret_string = ""
-        # if prediciton == 1:
-        #     ret_string = "this campaign is likely to succeed"
-        # else:
-        #     ret_string = "this campaign is likely to fail"
-        return render_template('home.html', title='Home', categories=categories, subcategories=subcategories)
+        return render_template('home.html', title='Welcome')
+
+
+    @APP.route("/input")
+    def input():
+        subcategories = subc
+        return render_template('input.html', title='Input', categories=categories, subcategories=subcategories)
+
+    
+    @APP.route("/about")
+    def member():
+        return render_template("about.html", title="About Us")
+
+
+    @APP.route("/model_info")
+    def info():
+        return render_template("test.html", title="Model Info")
 
 
     @APP.route("/predict", methods=['POST'])
@@ -74,9 +72,10 @@ def create_app():
             pred = "this campaign is more likely to succeed without getting picked by kickstarter staff"
         elif prediciton0 == 0 and prediciton1 == 1:
             pred = """this campaign is more likely to succeed if you get picked by kickstarter staff.<br/>
-                <a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges'>Click here to find out more</a>"""
+                <a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges' target="_blank">
+                Click here to find out more</a>"""
         else:
             pred = "this campaign is likely to fail"
-        return render_template('predict.html', pred=pred)
+        return render_template('predict.html', pred=pred, title='Prediction')
 
     return APP

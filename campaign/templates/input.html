@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Kickstarter Prediction - {{ title }}</title> 
+        <!--link rel="stylesheet" href="https://unpkg.com/picnic"/-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    </head>
+    <body>
+        <h2>Enter your data</h2>
+        Fill out the form below to make a prediction on your campaign:<br/><br/>
+        <form action="/predict" method="post">
+            <div class="row">
+                <div class="six columns">
+                    <label for="Primary Category">Primary Category</label>
+                    <select name="Primary Category", id='Primary Category'>
+                        {% for category in categories %}
+                        <option value="{{ category }}">{{ category }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="six columns">
+                    <label for="Subcategory">Subcategory</label>
+                    <select name="Subcategory", id="Subcategory">
+                        {% for subcategory in subcategories %}
+                        <option value="{{ subcategory }}">{{ subcategory }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="backers">Enter the number of estimated backers</label>
+                    <input type="text" name="Backers Count" id='backers' onkeyup="success()" placeholder="Estimated Backers">
+                </div>
+                <div class="six columns">
+                    <label for="goal">Enter the goal in USD</label>
+                    <input type="text" name="Campaign Goal" id='goal' onkeyup="success()" placeholder="Enter the goal in dollars">
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="pledged">Estimated amount pledged</label>
+                    <input type="text" name="Amount Pledged" id='pledged' onkeyup="success()" placeholder="Estimated amount pledged">
+                </div>
+                <div class="six columns">
+                    <label for="desclen">Length of Description</label>
+                    <input type="text" name="Description Length" id='desclen' onkeyup="success()" placeholder="Words in description">
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    <label for="campaign">Enter duration of campaign in days</label>
+                    <input type="text" name="Campaign Length" onkeyup="success()" id='campaign' placeholder="Campaign length (number of days)">
+                </div>
+                <div class="six columns">
+                    <label for="holiday">Will this be in a holiday season</label>
+                    <input type="text" name="Holiday Season" id='holiday' onkeyup="success()" placeholder="0 if not, 1 if it will">
+                </div>
+            </div>
+            <label for="cll">How long from first posting to launching the campaign?</label>
+            <input type="text" name="Campaign Launch Length" id='cll' onkeyup="success()" placeholder="Enter number of days to launch"><br/>
+            <input type="submit" id="predict_button" value="Predict campaign success" disabled='disabled'>
+            <script type="text/javascript">
+                function success() {
+                    if(document.getElementById("backers").value===""
+                        || document.getElementById("goal").value===""
+                        || document.getElementById("pledged").value===""
+                        || document.getElementById("desclen").value===""
+                        || document.getElementById("campaign").value===""
+                        || document.getElementById("holiday").value===""
+                        || document.getElementById("cll").value==="") { 
+                            document.getElementById('predict_button').disabled = true; 
+                        } else { 
+                            document.getElementById('predict_button').disabled = false;
+                        }
+                    }
+            </script>
+        </form>
+
+        <br/><br/><a href="/">Return Home</a>
+    </body>
+</html>
