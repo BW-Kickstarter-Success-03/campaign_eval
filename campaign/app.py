@@ -30,7 +30,7 @@ def create_app():
 
     @APP.route("/model_info")
     def info():
-        return render_template("test.html", title="Model Info")
+        return render_template("model.html", title="Model Info")
 
 
     @APP.route("/predict", methods=['POST'])
