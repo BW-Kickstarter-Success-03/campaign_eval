@@ -61,15 +61,20 @@ def create_app():
         prediciton0 = predictor.predict(df0)
         prediciton1 = predictor.predict(df1)
         if prediciton0 == 1 and prediciton1 == 1:
-            pred = "this campaign is likely to succeed"
+            pred = ", this campaign is likely to succeed"
         elif prediciton0 == 1 and prediciton1 == 0:
-            pred = "this campaign is more likely to succeed without getting picked by kickstarter staff"
+            pred = ", this campaign is more likely to succeed without getting picked by kickstarter staff"
         elif prediciton0 == 0 and prediciton1 == 1:
-            pred = """this campaign is more likely to succeed if you get picked by kickstarter staff.<br/>
+            pred = """:<br/>
+- If you don't get a kickstarter badge, your campaign is likely to fail<br/>
+- If you get a kickstarter badge, your campaign is likely to succeed<br/><br/>
+<a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges' target="_blank">
+Click here to learn about kickstarter badges"""
+            """this campaign is more likely to succeed if you get picked by kickstarter staff.<br/>
                 <a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges' target="_blank">
                 Click here to find out more</a>"""
         else:
-            pred = """this campaign is likely to fail, see our 
+            pred = """, this campaign is likely to fail, see our 
             <a href=\"/model_info\">model description</a> to learn about what makes a campaign successful."""
         return render_template('predict.html', pred=pred, title='Prediction')
 
