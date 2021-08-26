@@ -70,9 +70,6 @@ def create_app():
 - If you get a kickstarter badge, your campaign is likely to succeed<br/><br/>
 <a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges' target="_blank">
 Click here to learn about kickstarter badges"""
-            """this campaign is more likely to succeed if you get picked by kickstarter staff.<br/>
-                <a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges' target="_blank">
-                Click here to find out more</a>"""
         else:
             pred = """, this campaign is likely to fail, see our 
             <a href=\"/model_info\">model description</a> to learn about what makes a campaign successful."""
