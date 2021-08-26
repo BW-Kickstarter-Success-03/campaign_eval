@@ -3,15 +3,12 @@ import pickle
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
-from .extra_data import subcategories as subc
+from .extra_data import subcategories, categories
 
 
 def create_app():
     APP = Flask(__name__)
     
-    categories = ['film & video', 'music', 'technology', 'publishing', 
-        'art', 'food', 'games', 'fashion', 'comics', 'design', 'photography',
-        'crafts', 'theater', 'journalism', 'dance']
     @APP.route("/")
     def root():
         return render_template('home.html', title='Welcome')
@@ -19,7 +16,6 @@ def create_app():
 
     @APP.route("/input")
     def input():
-        subcategories = subc
         return render_template('input.html', title='Input', categories=categories, subcategories=subcategories)
 
     
@@ -37,33 +33,31 @@ def create_app():
     def predict():
         data0 = {'id': [9999999999],
             'Primary Category':[request.values['Primary Category']],
-            'Subcategory':[request.values['Subcategory']],
-            'Backers Count':[request.values['Backers Count']],
             'Campaign Goal':[request.values['Campaign Goal']],
-            'Amount Pledged':[request.values['Amount Pledged']],
             'Staff Pick':[0],
             'Description Length':[request.values['Description Length']],
             'Campaign Length':[request.values['Campaign Length']],
+            'Subcategory':[request.values['Subcategory']],
             'Holiday Season':[request.values['Holiday Season']],
-            'Campaign Launch Length':[request.values['Campaign Launch Length']]
+            'Campaign Launch Length':[request.values['Campaign Launch Length']],
+            'Amount Pledged':[request.values['Product Name Length']]
         }
         data1 = {'id': [9999999999],
             'Primary Category':[request.values['Primary Category']],
-            'Subcategory':[request.values['Subcategory']],
-            'Backers Count':[request.values['Backers Count']],
             'Campaign Goal':[request.values['Campaign Goal']],
-            'Amount Pledged':[request.values['Amount Pledged']],
             'Staff Pick':[1],
             'Description Length':[request.values['Description Length']],
             'Campaign Length':[request.values['Campaign Length']],
+            'Subcategory':[request.values['Subcategory']],
             'Holiday Season':[request.values['Holiday Season']],
-            'Campaign Launch Length':[request.values['Campaign Launch Length']]
+            'Campaign Launch Length':[request.values['Campaign Launch Length']],
+            'Amount Pledged':[request.values['Product Name Length']]
         }
         df0 = pd.DataFrame(data0)
         df0.set_index('id', drop=True, inplace=True)
         df1 = pd.DataFrame(data1)
         df1.set_index('id', drop=True, inplace=True)
-        predictor = pickle.load(open('test_forest.pkl', 'rb'))
+        predictor = pickle.load(open('xgb.pkl', 'rb'))
         prediciton0 = predictor.predict(df0)
         prediciton1 = predictor.predict(df1)
         if prediciton0 == 1 and prediciton1 == 1:
@@ -75,7 +69,8 @@ def create_app():
                 <a href='https://www.kickstarter.com/blog/introducing-projects-we-love-badges' target="_blank">
                 Click here to find out more</a>"""
         else:
-            pred = "this campaign is likely to fail"
+            pred = """this campaign is likely to fail, see our 
+            <a href=\"/model_info\">model description</a> to learn about what makes a campaign successful."""
         return render_template('predict.html', pred=pred, title='Prediction')
 
     return APP

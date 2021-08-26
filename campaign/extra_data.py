@@ -169,3 +169,7 @@ subcategories = ['Art',
  'Plays',
  'Spaces',
  'Theater']
+
+categories = ['Music', 'Film', 'Art', 'Publishing', 'Technology', 'Food', 'Games',
+       'Fashion', 'Comics', 'Crafts', 'Design', 'Photography', 'Theater',
+       'Journalism', 'Dance']
