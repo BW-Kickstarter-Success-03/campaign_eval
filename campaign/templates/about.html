@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Kickstarter Prediction - {{ title }}</title> 
+        <!--link rel="stylesheet" href="https://unpkg.com/picnic"/-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    </head>
+    <body>
+        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; height: 30vh; cursor: default;">
+            <div style="width: 100%; cursor: inherit;"><div style="width: 100%; height: 100%;">
+                <img src="static/img/home_page_image.PNG"
+                style="display: block; object-fit: cover; border-radius: 0px; width: 100%; height: 30vh; opacity: 1; object-position: center 50%;">
+            </div></div>
+        </div>
+        <h2>About us</h2>
+        Here are a few links for each member of our team:<br/><br/>
+        Daniel Ferber: <a href="https://www.linkedin.com/in/daniel-ferber/" target="_blank"><input type="submit" value="LinkedIn"></a>
+        <a href="https://github.com/Daos21912" target="_blank"><input type="submit" value="Github"></a><br/>
+        <br/>
+        Emily Flener: <a href="https://www.linkedin.com/in/emilyflener/" target="_blank"><input type="submit" value="LinkedIn"></a>
+        <a href="https://github.com/EmilyAFlener" target="_blank"><input type="submit" value="Github"></a><br/>
+        <br/>
+        Madina: <a href="https://www.linkedin.com/in/madina-izimbetova-52562956/" target="_blank"><input type="submit" value="LinkedIn"></a> 
+        <a href="https://github.com/madina-iz" target="_blank"><input type="submit" value="Github"></a><br/>
+        <br/>
+        Peter Rockwood: <a href="https://www.linkedin.com/in/peter-rockwood-4140239b/" target="_blank"><input type="submit" value="LinkedIn"></a>
+        <a href="https://github.com/prockwood" target="_blank"><input type="submit" value="Github"></a><br/>
+        <br/>
+        <a href="/"><input type="submit" value="Return Home"></a>
+    </body>
+</html>

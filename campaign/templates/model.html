@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Kickstarter Prediction - {{ title }}</title>
+        <!--link rel="stylesheet" href="https://unpkg.com/picnic"/-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+    </head>
+    <body>
+        <div style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; height: 30vh; cursor: default;">
+            <div style="width: 100%; cursor: inherit;"><div style="width: 100%; height: 100%;">
+                <img src="static/img/home_page_image.PNG"
+                style="display: block; object-fit: cover; border-radius: 0px; width: 100%; height: 30vh; opacity: 1; object-position: center 50%;">
+            </div></div>
+        </div>
+        <h1 class="code-line" data-line-start=0 data-line-end=1 style="text-align: center;"><a id="The_Model_0"></a>The Model</h1>
+        <p class="has-line-data" data-line-start="1" data-line-end="2">Our model is designed to predict whether a Kickstarter campaign will meet its funding goal or not. 
+            Using a dataset of Kickstarter campaigns spanning from April 2009 to May 2021, with over 131,000 campaigns represented, we observe a prediction accuracy of 84%.</p>
+        <p class="has-line-data" data-line-start="3" data-line-end="4">The model makes its prediction based on 9 features:</p>
+        <ul>
+            <li class="has-line-data" data-line-start="5" data-line-end="6"><strong>Primary Category</strong>: One of the major 15 product categories designated by Kickstarter</li>
+            <li class="has-line-data" data-line-start="6" data-line-end="7"><strong>Campaign Goal</strong>: The campaign funding goal</li>
+            <li class="has-line-data" data-line-start="7" data-line-end="8"><strong>Staff Pick</strong>: Whether or not the campaign receives a ‘Projects We Love’ badge</li>
+            <li class="has-line-data" data-line-start="8" data-line-end="9"><strong>Description Length</strong>: The number of words in the campaign description</li>
+            <li class="has-line-data" data-line-start="9" data-line-end="10"><strong>Campaign Length</strong>: The span of time in days between a campaigns launch and end</li>
+            <li class="has-line-data" data-line-start="10" data-line-end="11"><strong>Subcategory</strong>: One of 161 product subcategories designated by Kickstarter. (If you do not know your Subcategory you can use your Primary Category here as well.)</li>
+            <li class="has-line-data" data-line-start="11" data-line-end="12"><strong>Holiday Season</strong>: Whether the campaign was launched in the busy shopping months of November, December or January</li>
+            <li class="has-line-data" data-line-start="12" data-line-end="13"><strong>Campaign Launch</strong> Length: The span of time between creating and launching a campaign</li>
+            <li class="has-line-data" data-line-start="13" data-line-end="15"><strong>Product Name Length</strong>: The number of words in the name of your product</li>
+        </ul>
+        <p class="has-line-data" data-line-start="15" data-line-end="16">After testing a variety of ensemble classifier estimators, our best performing estimator, 
+            <a href="https://xgboost.readthedocs.io/en/latest/python/python_api.html">the XGBClassifier</a>, was selected to be implemented in this web application. 
+            XGBClassifier is an implementation of gradient boosted decision tree classification, which combines the high performance and generality of Random Forest 
+            classifiers with gradient descent optimization. The classifier was trained on over 105,000 campaign observations, tested on over 26,000, and achieved an 
+            overall accuracy-score of 84% against the testing data. The positive prediction rate was 85% while the negative prediction rate was 79%, so keep in mind 
+            that a negative prediction is less accurate than a positive one.
+        </p>
+        <p class="has-line-data" data-line-start="17" data-line-end="18">In figure 1 below we can see a plot of the relative importances of our model features. 
+            The ‘Staff Pick’ feature appears to be extremely dominant. Indeed, among the 14% of campaigns in our dataset who received a ‘Projects We Love’ badge, 
+            91% meet their funding goal. A badge is a 
+            <a href="https://help.kickstarter.com/hc/en-us/articles/115005135214-How-does-my-project-become-a-Project-We-Love-or-get-featured-on-the-homepage-">good thing to get</a> 
+            but given to relatively few. However, among the 84% who did not receive badges, 52% still achieved their funding goal. Because badges are awarded after the launch 
+            of a campaign, our users will not know whether they will receive one or not at the outset. Because of this, our application makes two predictions: one with a badge 
+            awarded and one without a badge awarded. In this way our users can assess the likelihood of campaign success under these two scenarios.
+        </p>
+        <img src="static/img/feat_imp.png" alt="Feature Importances (Figure 1)" title="Feature Importances (Figure 1)" style="margin-left: 5%;">
+        <p class="has-line-data" data-line-start="19" data-line-end="20">In figures 2 through 5 below, we can see plots of how the features in our model contributed to the 
+            prediction of campaign success and failure respectively. In figures 2 and 3 we can see a campaign predicted to meet its funding goal in which the the most influential 
+            features are positive and associated with the ‘Subcategory’ of ‘Fiction’, followed closely by having received a Staff Pick badge. In figures 4 and 5 we can see a campaign 
+            predicted to not meet its funding goal in which the most influential features are negative and associated with the ‘Subcategory’ of ‘Diy’ and the ‘Primary Category’ 
+            of ‘Crafts’. If any users would like this kind of personalized prediction analysis please reach-out to Dan F for pricing options.
+        </p>
+        <img src="static/img/shapexplainer_status1.png" alt="Shap Explainer (Figure 2)" title="Shap Explainer (Figure 2)" style="margin-left: 5%;"><br/>
+        <img src="static/img/shap_status1.png" alt="Shap Waterfall (Figure 3)" title="Shap Waterfall (Figure 3)" style="margin-left: 5%;"><br/>
+        <img src="static/img/shap_explainer_status0.png" alt="Shap Explainer (Figure 4)" title="Shap Explainer (Figure 4)" style="margin-left: 5%;"><br/>
+        <img src="static/img/shap_status0.png" alt="Shap Waterfall (Figure 5)"title="Shap Waterfall (Figure 5)" style="margin-left: 5%;"><br/>
+        <p class="has-line-data" data-line-start="21" data-line-end="22">We hope you find this application useful and bid you luck, Kickstarter.</p>
+        <p class="has-line-data" data-line-start="23" data-line-end="24">-Kickstarter-Prediction Team</p>
+        <br/><br/>
+        <div style="text-align:center"><a href="/"><input type="submit" value="Return Home"></a></div>
+    </body>
+</html>
