@@ -1,9 +1,0 @@
-         
- 13  Goal Reached Date         148206 non-null  datetime64[ns] 
- 14  Description Length        148206 non-null  float64        
- 15  Campaign Length           148206 non-null  int64                  
- 17  Goal Amount Per Backer    148206 non-null  float64        
- 18  Pledge Amount Per Backer  137461 non-null  float64        
- 19  Goal Amount Per Day       148206 non-null  float64        
- 20  Pledge Amount Per Day     148206 non-null  float64        
- 21  Campaign Launch Length    148206 non-null  timedelta64[ns]

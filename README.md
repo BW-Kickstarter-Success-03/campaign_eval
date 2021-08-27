@@ -1,5 +1,9 @@
 # Kickstarter Campaign_Evaluation
 
+Link to github repository: https://github.com/BW-Kickstarter-Success-03/campaign_eval
+Link to heroku app: https://campaign-eval.herokuapp.com/
+
+
 ## Situation
 We are data scientists tasked with helping entrepreneurs achieve success  with their Kickstarter product launches.
 
